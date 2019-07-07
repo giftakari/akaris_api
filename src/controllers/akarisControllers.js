@@ -1,18 +1,6 @@
 
 const Contact = require('../models/akarisModels')
 
-module.exports = addNewContact = (req, res) => {
-  let newContact = new Contact(req.body);
-
-  newContact.save((err, contact) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(contact);
-  });
-};
-
-
 //==POST 
 //Create contact
 exports.addNewContact = async (req, res) => {
@@ -32,36 +20,18 @@ exports.addNewContact = async (req, res) => {
     
 }
 
-module.exports = getContacts = (req, res) => {
-  Contact.find({}, (err, contact) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(contact);
-  });
+//GET ALL CONTACTS
+exports.getContacts = async (req, res) => {
+  try {
+      const contacts = await Contact.find()
+       res.status(201).json({
+         contacts
+       })
+  } catch (error) {
+    res.send(error)
+  }
+  
 };
 
 
-module.exports = getContactWithID = (req, res) => {
-  Contact.findById(req.params.contactId, (err, contact) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(contact);
-  });
-};
 
-//UPDATE
-module.exports = updateContact = (req, res) => {
-  Contact.findOneAndUpdate(
-    { _id: req.params.contactId },
-    req.body,
-    { new: true },
-    (err, contact) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(contact);
-    }
-  );
-};

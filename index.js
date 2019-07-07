@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./src/routes/akarisRoutes");
+const contactRouter  = require('./src/routes/akarisRoutes');
 const app = express();
 
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 //==SERVING ROUTES
-
+app.use('/api/contacts', contactRouter)
 
 
 //====SERVER===
