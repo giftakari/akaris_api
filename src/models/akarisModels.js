@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema;
+//const Schema = mongoose.Schema;
 
-module.exports = ContactSchema = new Schema({
+const  ContactSchema = mongoose.Schema({
   firstName: {
     type: String,
     required: "Enter a first name"
@@ -25,3 +25,7 @@ module.exports = ContactSchema = new Schema({
     default: Date.now
   }
 });
+
+const Contact = mongoose.model('Contact', ContactSchema);
+
+module.exports = Contact
